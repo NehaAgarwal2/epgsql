@@ -223,6 +223,7 @@ equery(C, Sql) ->
 
 %% TODO add fast_equery command that doesn't need parsed statement
 equery(C, Sql, Parameters) ->
+    io:fwrite("^^^^^^^^SQL^^^^^^^^^^equery epgsql.erl [1], ~p~n",[Sql]),
     case parse(C, "", Sql, []) of
         {ok, #statement{types = Types} = S} ->
             TypedParameters = lists:zip(Types, Parameters),
@@ -234,6 +235,7 @@ equery(C, Sql, Parameters) ->
 -spec equery(connection(), string(), sql_query(), [bind_param()]) ->
                     epgsql_cmd_equery:response().
 equery(C, Name, Sql, Parameters) ->
+    io:fwrite("^^^^^^^^SQL^^^^^^^^^^equery epgsql.erl [2], ~p~n",[Sql]),
     case parse(C, Name, Sql, []) of
         {ok, #statement{types = Types} = S} ->
             TypedParameters = lists:zip(Types, Parameters),
